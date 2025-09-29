@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title>Recipes</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- The website JavaScript file -->
+<!--     <script src="/script.js" defer></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="button" href="./index.html">Home</a>
+
+      <div class="dropdown">
+        <a class="button" href="./cs_projects.html">CS_Projects</a>
+        <div class="dropdown-content">
+          <a href="/sports_tech.html">Sports Technology</a>
+          <a href="/tunepad.html">TunePad</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="button" href="./writing.html">Writing</a>
+        <div class="dropdown-content">
+          <a href="./poetry.html">Poetry</a>
+          <a href="./book_reviews.html">Book Reviews</a>
+          <a href="./recipes.html">Recipes</a>
+          <a href="./art.html">Art</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Recipes</h1>
+        <div id="app">
+        <!-- Vue components will be rendered here -->
+        <div class="viz">
+          <recipe-box file="recipes/tortillas.txt" image="https://cdn.glitch.global/bf42918b-6b92-4ac1-a680-62c8826e3622/tortilla.jpg?v=1719521764755g"></recipe-box>
+          <recipe-box file="recipes/biscuits.txt" image="https://cdn.glitch.global/bf42918b-6b92-4ac1-a680-62c8826e3622/tortilla.jpg?v=1719521764755g"></recipe-box>
+<!--  biscuits, tortillas, rice, toreznos, muffins      -->
+        </div>
+      </div>
+        
+        
+        
+      </div>
+    </div>
+    
+    <script src="/script.js" defer></script>
+  <script>
+    Vue.component('recipe-box', {
+      template: `
+        <div class="recipe-box">
+          <img :src="image" alt="Recipe Image">
+          <div class="caption" v-html="formattedRecipe"></div>
+        </div>
+      `,
+      props: ['file', 'image'],
+      data() {
+        return {
+          recipe: ''
+        };
+      },
+      computed: {
+        // formattedRecipe() {
+        //   if (!this.recipe) return '';
+        //   const lines = this.recipe.split('\n');
+        //   let formatted = '<h3>' + lines[0].split(': ')[1] + '</h3>';
+        //   let section = '';
+        //   for (let i = 1; i < lines.length; i++) {
+        //     if (lines[i].trim() === '') continue;
+        //     if (lines[i].includes(':')) {
+        //       if (section) {
+        //         formatted += '<p>' + section.trim() + '</p>';
+        //       }
+        //       formatted += '<h4>' + lines[i].split(': ')[0] + '</h4>';
+        //       section = lines[i].split(': ')[1] + '\n';
+        //     } else {
+        //       section += lines[i] + '\n';
+        //     }
+        //   }
+        //   if (section) {
+        //     formatted += '<p>' + section.trim() + '</p>';
+        //   }
+        //   return formatted;
+        // }
+        formattedRecipe() {
+            if (!this.recipe) return '';
+            const lines = this.recipe.split("\n");
+            let formatted = '';
+            let section = '';
+            let isIngredientSection = false;
+            let isInstructionSection = false;
+
+            lines.forEach(line => {
+              if (line.startsWith('Title: ')) {
+                formatted += `<h3>${line.replace('Title: ', '')}</h3>`;
+              } else if (line.trim() === 'Ingredients:') {
+                isIngredientSection = true;
+                isInstructionSection = false;
+                formatted += '<div class="ingredients"><h4>Ingredients</h4><ul>';
+              } else if (line.trim() === 'Instructions:') {
+                isIngredientSection = false;
+                isInstructionSection = true;
+                formatted += '</ul></div><div class="instructions"><h4>Instructions</h4><ol>';
+              } else if (line.trim().startsWith('- ') && isIngredientSection) {
+                formatted += `<li>${line.replace('- ', '')}</li>`;
+              } else if (line.trim().match(/^\d+\./) && isInstructionSection) {
+                formatted += `<li>${line}</li>`;
+              } else {
+                formatted += `<p>${line}</p>`;
+              }
+            });
+
+            if (isIngredientSection) {
+              formatted += '</ul></div>';
+            }
+
+            if (isInstructionSection) {
+              formatted += '</ol></div>';
+            }
+
+            return formatted;
+          }
+      },
+      mounted() {
+        fetch(this.file)
+          .then(response => response.text())
+          .then(data => {
+            this.recipe = data;
+          })
+          .catch(error => {
+            console.error('Error fetching the recipe:', error);
+          });
+      }
+    });
+
+    new Vue({
+      el: '#app'
+    });
+  </script>
+    
+    
+  </body>
+</html>

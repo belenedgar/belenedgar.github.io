@@ -1,0 +1,356 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #E9EED9; /* #cad9e3 */
+  color: #54473F; /* #37393b */
+  padding-bottom: 2rem; /* Adjust to desired spacing */
+  font-weight: bold;
+}
+
+/* Page structure */
+.wrapper {
+  min-height: var(--wrapper-height);
+  display: grid;
+  place-items: center;
+  margin: 0 1rem;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+/* Very light scaling for our illustration */
+.title {
+  color: #54473F;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  /*font-weight: bold;*/
+  font-size: 50px;
+  line-height: 105%;
+  margin: 1;
+}
+
+/* Very light scaling for our illustration */
+.illustration {
+  max-width: 100%;
+  max-height: var(--image-max-width);
+  margin-top: var(--image-margin);
+}
+
+/* Instructions */
+.instructions {
+  margin: 1rem auto 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(425px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.figure {
+  text-align: center;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.custom-size-image {
+  width: 60%; /* Custom width */
+  height: auto; /* Adjust height proportionally */
+  max-width: 800px; /* Optional: set a max width */
+}
+
+.custom-size-image-2 {
+  width: 30%; /* Adjust to your desired width */
+  height: auto; /* Adjust height proportionally */
+}
+
+/* Button - Add it from the README instructions */
+button,
+input {
+  font-family: inherit;
+  font-size: 100%;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: 500ms;
+  color: #37393b;
+}
+
+/* Subheading */
+h2 {
+  color: #54473F;
+  font-size: 30px;
+}
+
+h3{
+  color: #54473F;
+  font-size: 20px;
+  text-align: left;
+}
+
+h4{
+  font-size: 20px;
+}
+
+li {
+  margin: 5px;
+}
+
+header {
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+footer {
+  background-color: #9A7E6F; /* Replace with your desired background color */
+  color: #E9EED9; /* Text color for better visibility */
+  padding: 3px; /* Adjust as needed to add space around the content inside the footer */
+  /* position: absolute; */
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 20px;
+  
+}
+
+hr {
+  border: 0;            /* Remove default border */
+  height: 1px;          /* Set the height of the line */
+  background-color: #54473F; /* Set the line color */
+  width: 100%;           /* Set the width (or adjust as needed) */
+  /*margin: 20px auto;    /* Center and add spacing above/below */
+}
+
+
+.colored-block {
+  background-color: #CBD2A4; /* Change to your desired color */
+  /*color: #CBD2A4;               /* Text color */
+  padding: 10px 20px;        /* Padding to make it block-like */
+  /*border-radius: 8px;        /* Optional: Rounded corners */
+  width: 100%;        /* Optional: Adjusts to the content width */
+  margin: 10px 0;            /* Optional: Adds spacing above and below */
+  text-align: center;
+}
+
+.colored-block-2 {
+  background-color: #f0996e; /* Change to your desired color */
+  /*color: #CBD2A4;               /* Text color */
+  padding: 10px 20px;        /* Padding to make it block-like */
+  /*border-radius: 8px;        /* Optional: Rounded corners */
+  width: 100%;        /* Optional: Adjusts to the content width */
+  margin: 10px 0;            /* Optional: Adds spacing above and below */
+  text-align: center;
+}
+.colored-block-2 h4 {
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 10px; /* Adjust bottom margin as needed */
+}
+
+
+.topnav {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+}
+
+/* https://www.w3schools.com/tags/tag_button.asp */
+.button {
+  border: none;
+  color: #E9EED9;
+  background-color: #9A7E6F; /* DA8359 #f1f1f1 */
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 125px;
+  height: auto; /* 20px */
+}
+
+.button:hover {
+  background-color: #b39b8f;
+  /*   background-color: #f1f1f1; */
+  color: #54473F;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #37393b;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #dddddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f0996e;
+  color: #E9EED9;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.download-btn:hover {
+  background-color: #DA8359;
+}
+
+/* viz */
+
+.viz {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px; /* Add some space between poem boxes */
+}
+
+section {
+  /* Center the sections of the essay */
+  position: relative;
+  margin: 10px auto;
+}
+
+section .viz {
+  position: relative;
+  background-color: hsl(107, 19%, 47%);
+  /*   border-radius: 10px; */
+  box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  width: 500px;
+  height: 300px;
+  margin: 10px;
+  overflow: scroll;
+}
+
+.poem-box {
+  /*   font-family: "Fizzy Soda", sans-serif; */
+  /*   font-family: 'Mockind Easter', sans-serif; */
+  margin: 3px;
+  padding: 10px;
+  /*   border-radius: 20px; */
+  display: inline-block;
+  background-color: #e6eced;
+  /*   box-shadow: 1px 2px 5px rgba(255, 255, 255, 0.4); */
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+  white-space: pre-wrap;
+  overflow: scroll;
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+}
+.poem-box .first-line {
+  font-weight: bold; /* Style for the first line */
+}
+
+.navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.navigator button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.recipe-box {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.recipe-box img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.recipe-box h3,
+.recipe-box h4 {
+  margin: 10px 0;
+}
+
+.recipe-box ul,
+.recipe-box ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.recipe-box .ingredients,
+.recipe-box .instructions {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-box {
+  font-family: "Arial", sans-serif;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 60%;
+  text-align: center;
+  white-space: pre-wrap;
+}
+.review-box img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+}
+.review-box .caption {
+  padding: 10px;
+}
+.review-box .caption h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.review-box .caption p {
+  margin: 10px 0;
+}

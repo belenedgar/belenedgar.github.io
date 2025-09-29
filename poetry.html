@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <title>Poetry</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div class="topnav">
+      <!-- Your navigation links -->
+      <a class="button" href="./index.html">Home</a>
+
+      <div class="dropdown">
+        <a class="button" href="./cs_projects.html">CS_Projects</a>
+        <div class="dropdown-content">
+          <a href="/sports_tech.html">Sports Technology</a>
+          <a href="/tunepad.html">TunePad</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="button" href="./writing.html">Writing</a>
+        <div class="dropdown-content">
+          <a href="./poetry.html">Poetry</a>
+          <a href="./book_reviews.html">Book Reviews</a>
+          <a href="./recipes.html">Recipes</a>
+          <a href="./art.html">Art</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Poetry</h1>
+        <div id="app">
+          <!-- Vue components will be rendered here -->
+          <div class="viz">
+            <poem-box file="poetry/coffee-days.txt"></poem-box>
+            <poem-box file="poetry/endings.txt"></poem-box>
+            <poem-box file="poetry/jellyfish.txt"></poem-box>
+            <poem-box file="poetry/sickness.txt"></poem-box>
+            <poem-box file="poetry/uvalde.txt"></poem-box>
+            <poem-box file="poetry/alone-in-space.txt"></poem-box>
+            <poem-box file="poetry/falafel.txt"></poem-box>
+            <poem-box file="poetry/be-sad.txt"></poem-box>
+            <poem-box file="poetry/breathe.txt"></poem-box>
+            <poem-box file="poetry/memories-in-a-bottle.txt"></poem-box>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/script.js" defer></script>
+    <script>
+      // Vue.component("poem-box", {
+      //   template: `<div class="poem-box">
+      //       <p>{{ poem }}</p>
+      //     </div>`,
+      //   props: ["poem"],
+      // });
+
+      Vue.component("poem-box", {
+        // template: `<div class="poem-box">
+        //   <p>{{ poem }}</p>
+        // </div>`,
+        template: `<div class="poem-box" v-html="formattedPoem"></div>`,
+        props: ["file"],
+        data() {
+          return {
+            poem: "",
+          };
+        },
+        computed: {
+          formattedPoem() {
+            if (!this.poem) return "";
+            const lines = this.poem.split("\n");
+            if (lines.length > 0) {
+              lines[0] = `<span class="first-line">${lines[0]}</span>`;
+            }
+            return lines.join("\n");
+          },
+        },
+        mounted() {
+          fetch(this.file)
+            .then((response) => response.text())
+            .then((data) => {
+              this.poem = data;
+            })
+            .catch((error) => {
+              console.error("Error fetching the poem:", error);
+            });
+        },
+      });
+
+      new Vue({
+        el: "#app",
+        // data: {
+        //   rosesAreRedPoem: "Welcome to my tester poem\n Pretending I'm a poet",
+        // },
+      });
+    </script>
+  </body>
+</html>
